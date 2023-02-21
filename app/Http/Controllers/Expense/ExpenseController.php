@@ -27,12 +27,12 @@ class ExpenseController extends Controller
             $data = new ExpenseCollection($this->expRepo->getAllExpenseModels($this->exp, 100, $this->with));
             
             if ($data) {
-                return response()->json(['result' => $data, "msg" => __('common.expenseList')], 200);    
+                return $this->response($data, __('common.expenseList'), 200);
             }
 
         } catch (\Exception $e) {
             Log::emergency($e);
-            return response()->json(["msg" => __('common.error')], 500);
+            return $this->response(NULL, __('common.error'), 500);
         }
     }
 
@@ -55,18 +55,19 @@ class ExpenseController extends Controller
         $expCatSingle = $this->expRepo->getSingleExpenseModels($request->expense_category_id, $this->expCat);
 
         if (!$expCatSingle) {
-            return response()->json(["msg" => __('common.expCatNotFound')], 200);
+
+            return $this->response(NULL, __('common.expCatNotFound'), 200);
         }
 
         try {
 
             $data = $this->expRepo->createExpenseModels($this->exp, $req);
-            return new ExpenseResource($data);
+            return $this->response(new ExpenseResource($data), __('common.expenseCreate'), 200);
             
         } catch (\Exception $e) {
             
             Log::emergency($e);
-            return response()->json(["msg" => __('common.error')], 500);
+            return $this->response(NULL, __('common.error'), 500);
             
         }
     }
@@ -80,15 +81,17 @@ class ExpenseController extends Controller
     public function show($id)
     {
         try {
-            $data = new ExpenseResource($this->expRepo->getSingleExpenseModels($id, $this->exp));
+            $data = $this->expRepo->getSingleExpenseModels($id, $this->exp);
             
             if ($data) {
-                return response()->json(['result' => $data, "msg" => __('common.expenseSingle')], 200);    
+                return $this->response( new ExpenseResource($data), __('common.expenseSingle'), 200);
+            } else {
+                return $this->response(NULL, __('common.notFound'), 200);
             }
 
         } catch (\Exception $e) {
             Log::emergency($e);
-            return response()->json(["msg" => __('common.error')], 500);
+            return $this->response(NULL, __('common.error'), 500);
         }
         
     }
@@ -115,13 +118,13 @@ class ExpenseController extends Controller
             $update = $this->expRepo->updateExpenseModels($this->exp, $id, $req);
             if ($update) {
                 $data = $this->expRepo->getSingleExpenseModels($id, $this->exp);
-                return new ExpenseResource($data);
+                return $this->response(new ExpenseResource($data), __('common.expenseUpdate'), 200);
             }
             
         } catch (\Exception $e) {
             
             Log::emergency($e);
-            return response()->json(["msg" => __('common.error')], 500);
+            return $this->response(NULL, __('common.error'), 500);
             
         }
     }
@@ -137,14 +140,14 @@ class ExpenseController extends Controller
         try {
             $delete = $this->expRepo->deleteExpenseModels($this->exp, $id);
             if ($delete) {
-                return response()->json(['msg' => __('common.delete')], 200);
+                return $this->response(NULL, __('common.delete'), 200);
             } else {
-                return response()->json(['msg' => __('common.notFound')], 200);
+                return $this->response(NULL, __('common.notFound'), 200);
             }
             
         } catch (\Exception $e) {
             Log::emergency($e);
-            return response()->json(["msg" => __('common.error')], 500);
+            return $this->response(NULL, __('common.error'), 500);
         }
 
     }

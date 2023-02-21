@@ -2,8 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\ExpenseRepositoryInterface;
-
 class ExpenseRepository {
 
     public function getAllExpenseModels($model, $paginationLimit, $with = []) {
