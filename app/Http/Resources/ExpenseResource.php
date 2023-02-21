@@ -15,6 +15,7 @@ class ExpenseResource extends JsonResource
     public function toArray($request)
     {
         return [
+            "id"            => $this->id,
             "category_name" => $this->expense_category->name,
             "amount"        => $this->amount,
             "note"          => $this->note,

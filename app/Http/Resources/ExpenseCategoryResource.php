@@ -15,6 +15,7 @@ class ExpenseCategoryResource extends JsonResource
     public function toArray($request)
     {
         return [
+            "id"       => $this->id,
             "name"       => $this->name,
             "image_url"  => $this->image_url,
             "created_at" => date('Y-m-d H:i:s', strtotime($this->created_at)),

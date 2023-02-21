@@ -17,7 +17,12 @@ class ExpenseRepository {
     }
 
     public function getSingleExpenseModels($id, $model) {
-        return $model::find($id);
+        $data = $model::find($id);
+        if ($data) {
+            return $data;
+        }
+
+        return false;
     }
 
     public function createExpenseModels($model, array $request) {
