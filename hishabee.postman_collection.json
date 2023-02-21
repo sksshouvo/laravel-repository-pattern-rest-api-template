@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "b4f6c69d-dd60-4465-9b00-5da0f2bb8248",
+		"name": "hishabee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5540193"
+	},
+	"item": [
+		{
+			"name": "ExpenseCategoryList",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{localhost}}/api/expense/category",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ExpenseCategorySingle",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{localhost}}/api/expense/category",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createExpenseCategory",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Test 2",
+							"type": "text"
+						},
+						{
+							"key": "image_url",
+							"value": "facebook.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{localhost}}/api/expense/category",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateExpenseCategory",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test 3\",\r\n    \"image_url\": \"google.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/api/expense/category/1",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteExpenseCategory",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test 3\",\r\n    \"image_url\": \"google.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/api/expense/category/1",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ExpenseList",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{localhost}}/api/expense/details",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ExpenseSingle",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{localhost}}/api/expense/details/1",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"details",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createExpense",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "expense_category_id",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "200",
+							"type": "text"
+						},
+						{
+							"key": "note",
+							"value": "Test",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{localhost}}/api/expense/details",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"details"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateExpense",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"expense_category_id\":2,\r\n    \"amount\":200,\r\n    \"note\":\"Test 2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/api/expense/details/1",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"details",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteExpense",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test 3\",\r\n    \"image_url\": \"google.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{localhost}}/api/expense/details/1",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"api",
+						"expense",
+						"details",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
