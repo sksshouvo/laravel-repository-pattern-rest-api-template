@@ -4,20 +4,16 @@ namespace App\Http\Controllers\Expense;
 
 use App\Http\Resources\ExpenseCategoryCollection;
 use App\Http\Resources\ExpenseCategoryResource;
-use App\Repositories\ExpenseRepository;
 use App\Http\Controllers\Controller;
-use App\Models\ExpenseCategory;
 use Illuminate\Http\Request;
 use Log;
 class ExpenseCategoryController extends Controller
 {
-    private ExpenseCategory $expenseCategory;
-    private ExpenseRepository $expenseRepository;
-    
-    public function __construct(ExpenseCategory $expenseCategory, ExpenseRepository $expenseRepository)
+
+    public function __construct()
     {
-        $this->expCat  = $expenseCategory;
-        $this->expRepo = $expenseRepository;
+        parent::__construct();
+        $this->with = ['expenses'];
     }
     /**
      * Display a listing of the resource.
@@ -26,7 +22,7 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
-        $data = $this->expRepo->getAllExpenseModels($this->expCat, 100);
+        $data = $this->expRepo->getAllExpenseModels($this->expCat, 100, $this->with);
 
         return new ExpenseCategoryCollection($data);
     }
