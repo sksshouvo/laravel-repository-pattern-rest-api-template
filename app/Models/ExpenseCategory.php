@@ -10,4 +10,9 @@ class ExpenseCategory extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'image_url'];
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
 }
