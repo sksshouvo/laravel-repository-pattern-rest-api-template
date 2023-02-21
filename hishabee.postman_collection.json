@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b4f6c69d-dd60-4465-9b00-5da0f2bb8248",
+		"_postman_id": "7ec5e850-820d-4929-8496-1dedf86b0f14",
 		"name": "hishabee",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5540193"
@@ -72,12 +72,12 @@
 					"formdata": [
 						{
 							"key": "name",
-							"value": "Test 2",
+							"value": "Test ",
 							"type": "text"
 						},
 						{
 							"key": "image_url",
-							"value": "facebook.com",
+							"value": "google.com",
 							"type": "text"
 						}
 					]
@@ -245,6 +245,11 @@
 							"key": "note",
 							"value": "Test",
 							"type": "text"
+						},
+						{
+							"key": "payment_method",
+							"value": "cash",
+							"type": "text"
 						}
 					]
 				},
@@ -275,7 +280,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"expense_category_id\":2,\r\n    \"amount\":200,\r\n    \"note\":\"Test 2\"\r\n}",
+					"raw": "{\r\n    \"expense_category_id\":2,\r\n    \"amount\":200,\r\n    \"note\":\"Test 2\",\r\n    \"payment_method\": \"bkash\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
