@@ -14,16 +14,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    private ExpenseCategory $expenseCategory;
-    private ExpenseRepository $expenseRepository;
-    private Expense $expense;
-        
-
     public function __construct()
     {
-        $this->exp     = new Expense();
-        $this->expCat  = new ExpenseCategory();
-        $this->expRepo = new ExpenseRepository();
+        $this->exp        = new Expense();
+        $this->expCat     = new ExpenseCategory();
+        $this->expRepo    = new ExpenseRepository();
 
+    }
+
+    public function response($result = NULL, $msg = NULL, $code = 200)
+    {
+        return response()->json(['result' => $result, 'msg' => $msg], $code);
     }
 }
