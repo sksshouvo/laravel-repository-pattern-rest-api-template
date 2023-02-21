@@ -28,6 +28,7 @@ class Expense extends Migration
             $table->foreignId('expense_category_id')->nullable()->index()->constrained('expense_categories')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedDecimal('amount', 20,2)->deafult(0);
             $table->text('note')->nullable();
+            $table->enum('payment_method', ['cash', 'bkash', 'due', 'others'])->default('cash');
             $table->timestamps();
             $table->softDeletes();
         });

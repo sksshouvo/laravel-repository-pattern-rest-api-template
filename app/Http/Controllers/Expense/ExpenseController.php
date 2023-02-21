@@ -7,17 +7,20 @@ use App\Http\Resources\ExpenseResource;
 use App\Repositories\ExpenseRepository;
 use App\Http\Controllers\Controller;
 use App\Models\Expense;
+use App\Models\ExpenseCategory;
 use Illuminate\Http\Request;
 use Log;
 
 class ExpenseController extends Controller
 {
-    private expense $expense;
+    private Expense $expense;
+    private ExpenseCategory $expenseCategory;
     private ExpenseRepository $expenseRepository;
         
-    public function __construct(expense $expense, ExpenseRepository $expenseRepository)
+    public function __construct(Expense $expense, ExpenseCategory $expenseCategory, ExpenseRepository $expenseRepository)
     {
         $this->exp     = $expense;
+        $this->expCat  = $expenseCategory;
         $this->expRepo = $expenseRepository;
         $this->with    = ['expense_category'];
     }
@@ -28,9 +31,17 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $data = $this->expRepo->getAllExpenseModels($this->exp, 100, $this->with);
+        try {
+            $data = new ExpenseCollection($this->expRepo->getAllExpenseModels($this->exp, 100, $this->with));
+            
+            if ($data) {
+                return response()->json(['result' => $data, "msg" => __('common.expenseList')], 200);    
+            }
 
-        return new ExpenseCollection($data);
+        } catch (\Exception $e) {
+            Log::emergency($e);
+            return response()->json(["msg" => __('common.error')], 500);
+        }
     }
 
     /**
@@ -43,10 +54,17 @@ class ExpenseController extends Controller
     {
         $request->validate([
             'expense_category_id' => 'required',
-            'amount'              => 'required'
+            'amount'              => 'required',
+            'payment_method'      => 'required'
         ]);
 
-        $req = $request->only(['expense_category_id', 'amount', 'note']);
+        $req = $request->only(['expense_category_id', 'amount', 'note', 'payment_method']);
+
+        $expCatSingle = $this->expRepo->getSingleExpenseModels($request->expense_category_id, $this->expCat);
+
+        if (!$expCatSingle) {
+            return response()->json(["msg" => __('common.expCatNotFound')], 200);
+        }
 
         try {
 
@@ -69,8 +87,18 @@ class ExpenseController extends Controller
      */
     public function show($id)
     {
-        $data = $this->expRepo->getSingleExpenseModels($id, $this->exp);
-        return new ExpenseResource($data);
+        try {
+            $data = new ExpenseResource($this->expRepo->getSingleExpenseModels($id, $this->exp));
+            
+            if ($data) {
+                return response()->json(['result' => $data, "msg" => __('common.expenseSingle')], 200);    
+            }
+
+        } catch (\Exception $e) {
+            Log::emergency($e);
+            return response()->json(["msg" => __('common.error')], 500);
+        }
+        
     }
 
     /**
@@ -84,10 +112,11 @@ class ExpenseController extends Controller
     {
         $request->validate([
             'expense_category_id' => 'required',
-            'amount'              => 'required'
+            'amount'              => 'required',
+            'payment_method'      => 'required'
         ]);
 
-        $req = $request->only(['expense_category_id', 'amount', 'note']);
+        $req = $request->only(['expense_category_id', 'amount', 'note', 'payment_method']);
 
         try {
 
